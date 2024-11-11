@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to the Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Flask App!</h1>
+    <nav>
+        <a href="{{ url_for('login') }}">Login</a> |
+        <a href="{{ url_for('create_account') }}">Create Account</a>
+    </nav>
+</body>
+</html>
+
