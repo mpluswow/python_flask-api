@@ -1,0 +1,107 @@
+:root {
+    --base-background-color: #1a1a1a;
+    --base-navbar-color: #333;
+    --base-footer-color: #2c2c2c;
+    --base-text-color: #ddd;
+    --base-hover-color: #00aaff;
+    --base-shadow-glow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1; /* Place behind all other content */
+}
+
+.video-background video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures full screen coverage without distortion */
+    object-position: center;
+}
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--base-background-color);
+    color: var(--base-text-color);
+}
+
+base-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: var(--base-navbar-color);
+    box-shadow: var(--base-shadow-glow);
+    z-index: 1000;
+}
+
+.base-navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%; /* Always span the full width */
+}
+
+.base-navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--base-hover-color);
+}
+
+.base-navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.base-navbar nav ul li a {
+    text-decoration: none;
+    color: var(--base-text-color);
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.base-navbar nav ul li a:hover {
+    color: var(--base-hover-color);
+    text-shadow: var(--base-shadow-glow);
+}
+
+base-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    background: var(--base-footer-color);
+    padding: 10px 0;
+    box-shadow: var(--base-shadow-glow);
+}
+
+base-footer p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--base-text-color);
+}
+
+base-main {
+    margin-top: 60px; /* Adjust for navbar height */
+    padding: 20px;
+    min-height: calc(100vh - 120px); /* Adjust for navbar and footer height */
+}
+

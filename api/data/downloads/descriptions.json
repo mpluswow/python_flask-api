@@ -1,4 +1,5 @@
 {
     "api.apk": "A .apk file containing example client data.",
-    "api.zip": "A complete solution zipped."
+    "api.zip": "A complete solution zipped.",
+    "api2.zip": "Update zipped."
 }

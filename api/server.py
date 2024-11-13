@@ -6,8 +6,10 @@ from modules.db_models import db, Account
 from modules.api import api_bp, jwt
 from modules.file_management import file_bp  # Import the file management blueprint
 from install.install_module import run_installation
+from modules.game import game_bp  # Import the game blueprint
 from datetime import datetime
 from functools import wraps
+
 
 def load_host_config():
     """Load host and port configuration from conf/host.conf."""
@@ -18,6 +20,7 @@ def load_host_config():
     port = config.getint('server', 'port', fallback=5000)
     return host, port
 
+
 def login_required(f):
     """Decorator to require login for certain routes."""
     @wraps(f)
@@ -27,6 +30,7 @@ def login_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
 
 def create_app():
     """Application factory pattern for creating the Flask app."""
@@ -55,7 +59,7 @@ def create_app():
     # Register blueprints
     app.register_blueprint(api_bp)
     app.register_blueprint(file_bp)  # Register the file management blueprint
-
+    app.register_blueprint(game_bp, url_prefix='/game')
     # Web routes
     @app.route('/')
     def index():
@@ -97,6 +101,9 @@ def create_app():
     @app.route('/dashboard')
     @login_required
     def dashboard():
+        user = db.session.get(Account, session['user_id'])
+        session['email'] = user.email
+        session['last_login'] = user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login else 'Unknown'
         return render_template('dashboard.html', username=session['username'])
 
     @app.route('/create-account', methods=['GET', 'POST'])
@@ -121,6 +128,7 @@ def create_app():
         return render_template('auth/create_account.html')
 
     return app
+
 
 if __name__ == '__main__':
     run_installation()

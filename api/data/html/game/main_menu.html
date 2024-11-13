@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_menu.css') }}">
+</head>
+<body>
+    <div class="main-menu">
+        <video autoplay muted loop id="background-video">
+            <source src="{{ url_for('static', filename='videos/game_bg.webm') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Rotating Shapes -->
+        <div class="shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        
+        <!-- Main Menu Content -->
+        <div class="menu-content">
+            <h1>DREAMERZZ</h1>
+            <p>Welcome, {{ username }}!</p>
+            <div class="menu-buttons">
+                <a href="#" class="btn">Start Game</a>
+                <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

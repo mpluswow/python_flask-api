@@ -1,0 +1,110 @@
+:root {
+    --create-account-bg: #222;
+    --create-account-border: #444;
+    --create-account-hover: #00aaff;
+    --create-account-text: var(--base-text-color);
+}
+
+.create-account-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background: var(--create-account-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--base-shadow-glow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-account-title {
+    text-align: center;
+    color: var(--create-account-text);
+    margin-bottom: 20px;
+}
+
+.create-account-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.create-account-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.create-account-field label {
+    color: var(--create-account-text);
+    font-size: 14px;
+}
+
+.create-account-field input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid var(--create-account-border);
+    border-radius: 5px;
+    background: #333;
+    color: var(--create-account-text);
+    text-align: center;
+}
+
+.create-account-field input:focus {
+    outline: none;
+    border-color: var(--create-account-hover);
+    box-shadow: var(--base-shadow-glow);
+}
+
+.create-account-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: var(--create-account-hover);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--base-shadow-glow);
+}
+
+.create-account-button:hover {
+    background: #005f8f;
+    transform: scale(1.05);
+}
+
+.create-account-button:active {
+    transform: scale(0.95);
+}
+
+.flash-messages {
+    margin-top: 20px;
+    padding: 10px;
+    background: #333;
+    border-radius: 5px;
+    color: var(--create-account-text);
+    list-style: none;
+    width: 100%;
+    max-width: 300px;
+}
+
+.flash-messages li {
+    margin-bottom: 5px;
+}
+
+.flash-messages .error {
+    color: red;
+}
+
+.flash-messages .success {
+    color: green;
+}
+

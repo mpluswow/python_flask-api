@@ -1,0 +1,57 @@
+:root {
+    --list-downloads-bg: #222;
+    --list-downloads-border: #444;
+    --list-downloads-hover: #00aaff;
+    --list-downloads-text: var(--base-text-color);
+}
+
+.list-downloads-container {
+    max-width: 800px;
+    margin: 80px auto;
+    background: var(--list-downloads-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--base-shadow-glow);
+}
+
+.list-downloads-title {
+    text-align: center;
+    color: var(--list-downloads-text);
+    margin-bottom: 20px;
+}
+
+.list-downloads-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--list-downloads-bg);
+    color: var(--list-downloads-text);
+    box-shadow: var(--base-shadow-glow);
+}
+
+.list-downloads-table th,
+.list-downloads-table td {
+    padding: 10px;
+    border: 1px solid var(--list-downloads-border);
+    text-align: left;
+}
+
+.list-downloads-table th {
+    background: var(--list-downloads-border);
+    color: var(--list-downloads-text);
+}
+
+.list-downloads-table tr:hover {
+    background: var(--list-downloads-hover);
+    color: #fff;
+}
+
+.list-downloads-table a {
+    color: var(--list-downloads-hover);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.list-downloads-table a:hover {
+    text-shadow: var(--base-shadow-glow);
+}
+

@@ -1,0 +1,87 @@
+:root {
+    --login-bg: #222;
+    --login-border: #444;
+    --login-hover: #00aaff;
+    --login-text: var(--base-text-color);
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background: var(--login-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--base-shadow-glow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-title {
+    text-align: center;
+    color: var(--login-text);
+    margin-bottom: 20px;
+}
+
+.login-form {
+    width: 100%; /* Ensure the form takes up the full width of container */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center; /* Center form elements horizontally */
+}
+
+.login-field {
+    width: 100%; /* Make input fields span the full form width */
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Small gap between label and input */
+    align-items: center;
+}
+
+.login-field label {
+    color: var(--login-text);
+    font-size: 14px;
+}
+
+.login-field input {
+    width: 100%;
+    max-width: 300px; /* Limit input field width */
+    padding: 10px;
+    border: 1px solid var(--login-border);
+    border-radius: 5px;
+    background: #333;
+    color: var(--login-text);
+    text-align: center; /* Center text inside input fields */
+}
+
+.login-field input:focus {
+    outline: none;
+    border-color: var(--login-hover);
+    box-shadow: var(--base-shadow-glow);
+}
+
+.login-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: var(--login-hover);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--base-shadow-glow);
+}
+
+.login-button:hover {
+    background: #005f8f;
+    transform: scale(1.05);
+}
+
+.login-button:active {
+    transform: scale(0.95);
+}
+

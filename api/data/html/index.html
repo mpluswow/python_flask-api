@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to the Flask App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <h1>Welcome to the Flask App!</h1>
-    <nav>
-        <a href="{{ url_for('login') }}">Login</a> |
-        <a href="{{ url_for('create_account') }}">Create Account</a>
-    </nav>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/data/css/index.css">
+<div class="index-container">
+    <div class="index-titlebar">
+        <h2>Welcome to the Game</h2>
+    </div>
+    <div class="index-content">
+        <button class="index-play-button">Play</button>
+    </div>
+</div>
+{% endblock %}
 

@@ -1,0 +1,60 @@
+:root {
+    --index-container-bg: #222;
+    --index-titlebar-bg: #333;
+    --index-button-bg: var(--base-hover-color);
+    --index-button-hover-bg: #005f8f;
+    --index-text-color: var(--base-text-color);
+    --index-border-color: var(--base-hover-color);
+}
+
+.index-container {
+    width: 80%;
+    max-width: 500px;
+    margin: 100px auto;
+    background: var(--index-container-bg);
+    color: var(--index-text-color);
+    border-radius: 10px;
+    box-shadow: var(--base-shadow-glow);
+    overflow: hidden;
+}
+
+.index-titlebar {
+    background: var(--index-titlebar-bg);
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 2px solid var(--index-border-color);
+}
+
+.index-titlebar h2 {
+    margin: 0;
+    color: var(--index-text-color);
+}
+
+.index-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.index-play-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: var(--index-button-bg);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--base-shadow-glow);
+}
+
+.index-play-button:hover {
+    background: var(--index-button-hover-bg);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--index-button-hover-bg);
+}
+
+.index-play-button:active {
+    transform: scale(0.95);
+}
+
