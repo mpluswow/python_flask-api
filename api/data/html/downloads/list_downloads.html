@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Downloads</title>
+</head>
+<body>
+    <h1>Available Downloads</h1>
+    <table border="1">
+        <tr>
+            <th>Filename</th>
+            <th>Description</th>
+            <th>Download</th>
+        </tr>
+        {% for file in files %}
+        <tr>
+            <td>{{ file.filename }}</td>
+            <td>{{ file.description }}</td>
+            <td><a href="{{ url_for('file_management.download_file', filename=file.filename) }}">Download</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

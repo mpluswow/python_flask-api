@@ -1,28 +1,39 @@
 import os
 import configparser
-from flask import Flask, render_template, flash, redirect, url_for, request, session, send_from_directory
-from modules.db_models import db, Account
-from modules.api import api_bp, jwt  # Import jwt from api module
-from install.install_module import run_installation
+from flask import Flask, render_template, flash, redirect, url_for, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from modules.db_models import db, Account
+from modules.api import api_bp, jwt
+from modules.file_management import file_bp  # Import the file management blueprint
+from install.install_module import run_installation
 from datetime import datetime
+from functools import wraps
 
 def load_host_config():
     """Load host and port configuration from conf/host.conf."""
     config = configparser.ConfigParser()
     config.read('conf/host.conf')
 
-    host = config.get('server', 'host', fallback='0.0.0.0')  # Changed default to '0.0.0.0'
+    host = config.get('server', 'host', fallback='0.0.0.0')
     port = config.getint('server', 'port', fallback=5000)
-
     return host, port
+
+def login_required(f):
+    """Decorator to require login for certain routes."""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            flash('You must be logged in to access this page.', 'danger')
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 def create_app():
     """Application factory pattern for creating the Flask app."""
     app = Flask(
         __name__,
-        template_folder='data/html',  # Set templates directory
-        static_folder='data'          # Set static files directory
+        template_folder='data/html',
+        static_folder='data'
     )
     app.secret_key = 'your_secret_key'  # Replace with a secure key
 
@@ -33,12 +44,17 @@ def create_app():
     # JWT configuration
     app.config['JWT_SECRET_KEY'] = 'another_secret_key'  # Replace with a secure key
 
+    # Upload configuration
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'data', 'uploads')
+    app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200 MB limit
+
     # Initialize the database and JWT
     db.init_app(app)
-    jwt.init_app(app)  # Initialize JWTManager with the app
+    jwt.init_app(app)
 
-    # Register API blueprint
+    # Register blueprints
     app.register_blueprint(api_bp)
+    app.register_blueprint(file_bp)  # Register the file management blueprint
 
     # Web routes
     @app.route('/')
@@ -69,7 +85,6 @@ def create_app():
     def logout():
         user_id = session.get('user_id')
         if user_id:
-            # Use db.session.get() instead of Account.query.get()
             user = db.session.get(Account, user_id)
             if user:
                 user.online = False
@@ -80,11 +95,8 @@ def create_app():
         return redirect(url_for('index'))
 
     @app.route('/dashboard')
+    @login_required
     def dashboard():
-        if 'user_id' not in session:
-            flash('You must be logged in to access the dashboard.', 'danger')
-            return redirect(url_for('login'))
-
         return render_template('dashboard.html', username=session['username'])
 
     @app.route('/create-account', methods=['GET', 'POST'])
@@ -94,12 +106,10 @@ def create_app():
             email = request.form['email']
             password = request.form['password']
 
-            # Check if username or email already exists
             if Account.query.filter((Account.username == username) | (Account.email == email)).first():
                 flash('Username or email already exists!', 'danger')
                 return redirect(url_for('create_account'))
 
-            # Create a new account
             hashed_password = generate_password_hash(password)
             new_account = Account(username=username, email=email, password=hashed_password)
             db.session.add(new_account)
@@ -110,27 +120,11 @@ def create_app():
 
         return render_template('auth/create_account.html')
 
-    # New download route
-    @app.route('/download/<filename>')
-    def download_file(filename):
-        """Serve files from the downloads folder."""
-        download_folder = os.path.join(os.getcwd(), 'data', 'downloads')
-        try:
-            return send_from_directory(download_folder, filename, as_attachment=True)
-        except FileNotFoundError:
-            flash('File not found.', 'danger')
-            return redirect(url_for('index'))
-
     return app
 
 if __name__ == '__main__':
-    # Run the installation routine to ensure database and tables exist
     run_installation()
-
-    # Load host and port from configuration
     host, port = load_host_config()
-
-    # Create and run the Flask app
     app = create_app()
     app.run(host=host, port=port, debug=True)
 
