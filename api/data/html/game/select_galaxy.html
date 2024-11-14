@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Galaxy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/select_galaxy.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background: url('{{ url_for('static', filename='images/galaxy_select_bg.jpeg') }}') no-repeat center center fixed; background-size: cover;">
+
+    <header>
+        <h1>Select a Galaxy</h1>
+        <p>Prepare for battle. Choose your galaxy and dominate the universe.</p>
+    </header>
+
+    <section class="galaxy-table-container">
+        <table class="galaxy-table">
+            <thead>
+                <tr>
+                    <th>Galaxy Name</th>
+                    <th>Description</th>
+                    <th>Player Count</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for galaxy in galaxies %}
+                <tr>
+                    <td>{{ galaxy.name }}</td>
+                    <td>{{ galaxy.description }}</td>
+                    <td>{{ galaxy.player_count }}</td>
+                    <td>
+                        {% if user_planet_map.get(galaxy.id) %}
+                            <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=1) }}" class="btn btn-primary">
+                                Go to Planet {{ user_planet_map[galaxy.id].position }}
+                            </a>
+                        {% else %}
+                            <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=1) }}" class="btn btn-secondary">
+                                Explore
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Galaxy Wars. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

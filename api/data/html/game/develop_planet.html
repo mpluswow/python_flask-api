@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Develop Planet - {{ planet.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/develop_planet.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background: url('{{ url_for('static', filename='images/galaxy_select_bg.jpeg') }}') no-repeat center center fixed; background-size: cover;">
+
+    <header>
+        <h1>Planet: {{ planet.name }}</h1>
+        <p>Position: {{ planet.position }} | Galaxy: {{ planet.galaxy.name }}</p>
+    </header>
+
+    <!-- Horizontal Resource Bar Section -->
+    <section class="horizontal-resources">
+        <div class="resource-icon" title="Metal">
+            <i class="fas fa-cogs"></i> <span>{{ planet.metal }}</span>
+        </div>
+        <div class="resource-icon" title="Crystal">
+            <i class="fas fa-gem"></i> <span>{{ planet.crystal }}</span>
+        </div>
+        <div class="resource-icon" title="Deuterium">
+            <i class="fas fa-flask"></i> <span>{{ planet.deuterium }}</span>
+        </div>
+    </section>
+
+    <main class="dashboard">
+        <!-- Buildings Section -->
+        <section class="buildings-section">
+            <h2>Buildings</h2>
+            <div class="buildings-grid">
+                <div class="building-item">
+                    <h3>Metal Mine</h3>
+                    <p>Level: {{ planet.metal_mine }}</p>
+                    <button disabled class="btn btn-disabled">Upgrade</button>
+                </div>
+                <div class="building-item">
+                    <h3>Crystal Mine</h3>
+                    <p>Level: {{ planet.crystal_mine }}</p>
+                    <button disabled class="btn btn-disabled">Upgrade</button>
+                </div>
+                <div class="building-item">
+                    <h3>Deuterium Synthesizer</h3>
+                    <p>Level: {{ planet.deuterium_synthesizer }}</p>
+                    <button disabled class="btn btn-disabled">Upgrade</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fleet Section -->
+        <section class="fleet-section">
+            <h2>Fleet</h2>
+            <div class="fleet-grid">
+                <div class="fleet-item">
+                    <h3>Small Cargo</h3>
+                    <p>{{ planet.small_cargo }}</p>
+                    <button disabled class="btn btn-disabled">Build</button>
+                </div>
+                <div class="fleet-item">
+                    <h3>Large Cargo</h3>
+                    <p>{{ planet.large_cargo }}</p>
+                    <button disabled class="btn btn-disabled">Build</button>
+                </div>
+                <div class="fleet-item">
+                    <h3>Light Fighter</h3>
+                    <p>{{ planet.light_fighter }}</p>
+                    <button disabled class="btn btn-disabled">Build</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Galaxy Game. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

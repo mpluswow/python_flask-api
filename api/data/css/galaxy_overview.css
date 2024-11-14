@@ -1,0 +1,173 @@
+/* galaxy_overview.css */
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(15, 15, 25, 0.95);
+    border-bottom: 2px solid #00bfff;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: #00bfff;
+    margin: 0;
+    text-shadow: 0 0 12px #00bfff;
+}
+
+header p {
+    font-size: 1.4rem;
+    color: #cccccc;
+    margin: 10px 0 0;
+}
+
+header img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.search-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 60%;
+    border: 2px solid #00bfff;
+    border-radius: 5px;
+    background: rgba(15, 15, 25, 0.95);
+    color: #ffffff;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: #00bfff;
+    color: #121212;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #33ccff;
+}
+
+.galaxy-table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: rgba(10, 10, 20, 0.95);
+    border: 2px solid #00bfff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    flex: 1;
+}
+
+.galaxy-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.galaxy-table thead th {
+    background: #222;
+    color: #00bfff;
+    padding: 15px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00bfff;
+    border-right: 1px solid #333;
+}
+
+.galaxy-table thead th:last-child {
+    border-right: none;
+}
+
+.galaxy-table tbody td {
+    padding: 15px;
+    font-size: 1rem;
+    color: #dddddd;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    vertical-align: middle;
+}
+
+.galaxy-table tbody td:last-child {
+    border-right: none;
+}
+
+.galaxy-table tbody tr:nth-child(even) {
+    background: rgba(20, 20, 30, 0.9);
+}
+
+.galaxy-table tbody tr:nth-child(odd) {
+    background: rgba(15, 15, 25, 0.9);
+}
+
+.galaxy-table tbody tr:hover {
+    background: rgba(30, 30, 50, 0.9);
+}
+
+/* Highlighted row */
+.highlight {
+    background-color: rgba(0, 128, 255, 0.3) !important;
+    animation: highlight-fade 2s ease-in-out;
+}
+
+@keyframes highlight-fade {
+    0% {
+        background-color: rgba(0, 128, 255, 0.6);
+    }
+    100% {
+        background-color: rgba(0, 128, 255, 0.3);
+    }
+}
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.pagination span {
+    color: #cccccc;
+}
+
+footer {
+    background-color: rgba(15, 15, 25, 0.95);
+    text-align: center;
+    padding: 20px 0;
+    border-top: 2px solid #00bfff;
+    width: 100%;
+    margin-top: auto;
+}
+
+footer p {
+    color: #cccccc;
+    font-size: 1rem;
+}
+

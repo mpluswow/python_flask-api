@@ -9,7 +9,7 @@
 <body>
     <div class="main-menu">
         <video autoplay muted loop id="background-video">
-            <source src="{{ url_for('static', filename='videos/game_bg.webm') }}" type="video/mp4">
+            <source src="{{ url_for('static', filename='images/main_menu_bg.webm') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
@@ -25,7 +25,7 @@
             <h1>DREAMERZZ</h1>
             <p>Welcome, {{ username }}!</p>
             <div class="menu-buttons">
-                <a href="#" class="btn">Start Game</a>
+                <a href="/game/start-game" class="btn">Start Game</a>
                 <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
                 <a href="{{ url_for('logout') }}" class="btn">Logout</a>
             </div>

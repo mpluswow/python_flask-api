@@ -1,0 +1,135 @@
+/* select_galaxy.css */
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensures body takes full viewport height */
+    display: flex;
+    flex-direction: column; /* Enables footer to stick at the bottom */
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(15, 15, 25, 0.95);
+    border-bottom: 2px solid #00bfff;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: #00bfff;
+    margin: 0;
+    text-shadow: 0 0 12px #00bfff;
+}
+
+header p {
+    font-size: 1.4rem;
+    color: #cccccc;
+    margin: 10px 0 0;
+}
+
+.galaxy-table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: rgba(10, 10, 20, 0.95);
+    border: 2px solid #00bfff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    flex: 1; /* Allows this section to grow and push footer to the bottom */
+}
+
+.galaxy-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.galaxy-table thead th {
+    background: #222;
+    color: #00bfff;
+    padding: 15px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00bfff;
+    border-right: 1px solid #333;
+}
+
+.galaxy-table thead th:last-child {
+    border-right: none;
+}
+
+.galaxy-table tbody td {
+    padding: 15px;
+    font-size: 1rem;
+    color: #dddddd;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.galaxy-table tbody td:last-child {
+    border-right: none;
+}
+
+.galaxy-table tbody tr:nth-child(even) {
+    background: rgba(20, 20, 30, 0.9);
+}
+
+.galaxy-table tbody tr:nth-child(odd) {
+    background: rgba(15, 15, 25, 0.9);
+}
+
+.galaxy-table tbody tr:hover {
+    background: rgba(30, 30, 50, 0.9);
+}
+
+.galaxy-table tbody td a.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.galaxy-table tbody td a.btn-primary {
+    background-color: #00bfff;
+    color: #121212;
+}
+
+.galaxy-table tbody td a.btn-primary:hover {
+    background-color: #33ccff;
+    transform: scale(1.1);
+}
+
+.galaxy-table tbody td a.btn-secondary {
+    background-color: #555;
+    color: #ffffff;
+}
+
+.galaxy-table tbody td a.btn-secondary:hover {
+    background-color: #666;
+    transform: scale(1.1);
+}
+
+footer {
+    background-color: rgba(15, 15, 25, 0.95);
+    text-align: center;
+    padding: 20px 0;
+    border-top: 2px solid #00bfff;
+    width: 100%; /* Ensures the footer spans the entire width */
+    margin-top: auto; /* Pushes footer to the bottom when there's little content */
+}
+
+footer p {
+    color: #cccccc;
+    font-size: 1rem;
+}
+

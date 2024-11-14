@@ -78,7 +78,6 @@ def create_app():
                 user.online = True
                 user.last_login = datetime.utcnow()
                 db.session.commit()
-                flash('Logged in successfully!', 'success')
                 return redirect(url_for('dashboard'))
             else:
                 flash('Invalid username or password.', 'danger')

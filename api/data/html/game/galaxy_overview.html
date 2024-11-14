@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy {{ galaxy.name }} Overview</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/galaxy_overview.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background: url('{{ url_for('static', filename='images/galaxy_select_bg.jpeg') }}') no-repeat center center fixed; background-size: cover;">
+
+    <header>
+        <h1>Galaxy {{ galaxy.name }}</h1>
+        <p>{{ galaxy.description }}</p>
+        <img src="{{ url_for('static', filename='images/' + (galaxy.image_url or 'default_galaxy.jpg')) }}" alt="Galaxy Image">
+    </header>
+
+    <section class="search-container">
+        <form method="GET" action="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id) }}">
+            <label for="search">Search by Username or Planet Coordinates:</label>
+            <input type="text" name="search" id="search" placeholder="Enter username or 1:1:1">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </section>
+
+    <section class="galaxy-table-container">
+        <h2>Planet Positions (Page {{ page }})</h2>
+        <table class="galaxy-table">
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Username</th>
+                    <th>Planet Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pos in positions %}
+                <tr {% if pos.position == highlighted_position %}id="highlighted-row" class="highlight"{% endif %}>
+                    <td>{{ pos.position }}</td>
+                    <td>{{ pos.planet.owner.username if pos.planet else 'Available' }}</td>
+                    <td>{{ pos.planet.name if pos.planet else 'Empty' }}</td>
+                    <td>
+                        {% if user_planet and user_planet.position == pos.position %}
+                            <form action="{{ url_for('game.develop_planet', galaxy_id=galaxy.id, planet_id=user_planet.id) }}" method="GET">
+                                <button type="submit" class="btn btn-primary">Develop</button>
+                            </form>
+                        {% elif user_planet %}
+                            {% if pos.planet %}
+                                <form action="{{ url_for('game.inspect_planet', galaxy_id=galaxy.id, planet_id=pos.planet.id) }}" method="GET">
+                                    <button type="submit" class="btn btn-secondary">Inspect</button>
+                                </form>
+                            {% else %}
+                                <form action="{{ url_for('game.migrate_planet', galaxy_id=galaxy.id, new_position=pos.position) }}" method="POST">
+                                    <button type="submit" class="btn btn-primary">Migrate</button>
+                                </form>
+                            {% endif %}
+                        {% elif pos.planet %}
+                            <button disabled class="btn btn-disabled">Occupied</button>
+                        {% else %}
+                            <form action="{{ url_for('game.colonize_planet', galaxy_id=galaxy.id, position=pos.position) }}" method="POST">
+                                <button type="submit" class="btn btn-secondary">Colonize</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=page-1) }}" class="btn btn-secondary">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page }}</span>
+
+        {% if positions|length == 50 %}
+        <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=page+1) }}" class="btn btn-secondary">Next</a>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Galaxy Game. All rights reserved.</p>
+    </footer>
+
+    <!-- Scroll to highlighted row -->
+    <script>
+        window.onload = function() {
+            const highlightedRow = document.getElementById('highlighted-row');
+            if (highlightedRow) {
+                highlightedRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        };
+    </script>
+</body>
+</html>
+
