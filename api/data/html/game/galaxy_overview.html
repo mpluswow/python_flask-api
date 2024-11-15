@@ -16,7 +16,7 @@
     </header>
 
     <section class="search-container">
-        <form method="GET" action="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id) }}">
+        <form method="GET" action="{{ url_for('galaxy.galaxy_overview', galaxy_id=galaxy.id) }}">
             <label for="search">Search by Username or Planet Coordinates:</label>
             <input type="text" name="search" id="search" placeholder="Enter username or 1:1:1">
             <button type="submit" class="btn btn-primary">Search</button>
@@ -42,23 +42,23 @@
                     <td>{{ pos.planet.name if pos.planet else 'Empty' }}</td>
                     <td>
                         {% if user_planet and user_planet.position == pos.position %}
-                            <form action="{{ url_for('game.develop_planet', galaxy_id=galaxy.id, planet_id=user_planet.id) }}" method="GET">
+                            <form action="{{ url_for('planet.develop_planet', galaxy_id=galaxy.id, planet_id=user_planet.id) }}" method="GET">
                                 <button type="submit" class="btn btn-primary">Develop</button>
                             </form>
                         {% elif user_planet %}
                             {% if pos.planet %}
-                                <form action="{{ url_for('game.inspect_planet', galaxy_id=galaxy.id, planet_id=pos.planet.id) }}" method="GET">
+                                <form action="{{ url_for('planet.inspect_planet', galaxy_id=galaxy.id, planet_id=pos.planet.id) }}" method="GET">
                                     <button type="submit" class="btn btn-secondary">Inspect</button>
                                 </form>
                             {% else %}
-                                <form action="{{ url_for('game.migrate_planet', galaxy_id=galaxy.id, new_position=pos.position) }}" method="POST">
+                                <form action="{{ url_for('planet.migrate_planet', galaxy_id=galaxy.id, new_position=pos.position) }}" method="POST">
                                     <button type="submit" class="btn btn-primary">Migrate</button>
                                 </form>
                             {% endif %}
                         {% elif pos.planet %}
                             <button disabled class="btn btn-disabled">Occupied</button>
                         {% else %}
-                            <form action="{{ url_for('game.colonize_planet', galaxy_id=galaxy.id, position=pos.position) }}" method="POST">
+                            <form action="{{ url_for('planet.colonize_planet', galaxy_id=galaxy.id, position=pos.position) }}" method="POST">
                                 <button type="submit" class="btn btn-secondary">Colonize</button>
                             </form>
                         {% endif %}
@@ -72,13 +72,13 @@
     <!-- Pagination -->
     <div class="pagination">
         {% if page > 1 %}
-        <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=page-1) }}" class="btn btn-secondary">Previous</a>
+        <a href="{{ url_for('galaxy.galaxy_overview', galaxy_id=galaxy.id, page=page-1) }}" class="btn btn-secondary">Previous</a>
         {% endif %}
 
         <span>Page {{ page }}</span>
 
         {% if positions|length == 50 %}
-        <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=page+1) }}" class="btn btn-secondary">Next</a>
+        <a href="{{ url_for('galaxy.galaxy_overview', galaxy_id=galaxy.id, page=page+1) }}" class="btn btn-secondary">Next</a>
         {% endif %}
     </div>
 

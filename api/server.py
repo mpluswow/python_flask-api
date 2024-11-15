@@ -7,6 +7,8 @@ from modules.api import api_bp, jwt
 from modules.file_management import file_bp  # Import the file management blueprint
 from install.install_module import run_installation
 from modules.game import game_bp  # Import the game blueprint
+from modules.galaxy import galaxy_bp
+from modules.planet import planet_bp
 from datetime import datetime
 from functools import wraps
 
@@ -60,6 +62,8 @@ def create_app():
     app.register_blueprint(api_bp)
     app.register_blueprint(file_bp)  # Register the file management blueprint
     app.register_blueprint(game_bp, url_prefix='/game')
+    app.register_blueprint(galaxy_bp, url_prefix='/galaxy')
+    app.register_blueprint(planet_bp, url_prefix='/planet')
     # Web routes
     @app.route('/')
     def index():

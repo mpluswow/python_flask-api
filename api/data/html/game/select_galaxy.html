@@ -32,11 +32,11 @@
                     <td>{{ galaxy.player_count }}</td>
                     <td>
                         {% if user_planet_map.get(galaxy.id) %}
-                            <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=1) }}" class="btn btn-primary">
+                            <a href="{{ url_for('galaxy.galaxy_overview', galaxy_id=galaxy.id, page=1) }}" class="btn btn-primary">
                                 Go to Planet {{ user_planet_map[galaxy.id].position }}
                             </a>
                         {% else %}
-                            <a href="{{ url_for('game.galaxy_overview', galaxy_id=galaxy.id, page=1) }}" class="btn btn-secondary">
+                            <a href="{{ url_for('galaxy.galaxy_overview', galaxy_id=galaxy.id, page=1) }}" class="btn btn-secondary">
                                 Explore
                             </a>
                         {% endif %}
